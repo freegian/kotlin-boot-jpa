@@ -10,8 +10,9 @@ class Shop(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = -1,
-    var name: String? = null
-): RdbEntity {
+    var name: String? = null,
+    override var audit: RdbAuditModel? = null
+): BaseEntity<Shop>() {
     companion object {
         fun get(repository: RdbRepository, id: Long): Shop? {
             return repository.get(Shop::class.java, id)
@@ -24,6 +25,13 @@ class Shop(
         }
         fun register(repository: RdbRepository, name: String): Shop {
             return repository.save(Shop(name = name))
+        }
+        fun search(repository: RdbRepository, name: String): List<Shop> {
+            return repository.findByCriteria(Shop::class.java) { criteria ->
+                criteria.where { condition ->
+                    condition.equal("name", name)
+                }.result()
+            }
         }
     }
     fun update(repository: RdbRepository, name: String): Shop {
