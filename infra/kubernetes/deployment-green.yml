@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: #[Deployment名]-green
+  namespace: #[Namespace名]
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: #[Application名]
+  template:
+    metadata:
+      labels:
+        app: #[Application名]
+        version: green
+    spec:
+      containers:
+        - name: #[Application名]
+          #ConfigMapを使う時は↓のような感じ
+          #          envFrom:
+          #          - configMapRef:
+          #              name: #[ConfigMap名]
+          image: #[DockerImageURI]
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080

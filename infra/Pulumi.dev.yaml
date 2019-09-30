@@ -1,0 +1,7 @@
+encryptionsalt: v1:WNh2tPFLJzs=:v1:ldIZSiBcRCJ8M49d:3NYufXP+y7Wi3BerZnaeEBRh0JKSww==
+config:
+  aws:region: ap-northeast-1
+  infra:ECR_REPOSITORY_NAME: #[ECR Repository名]
+  infra:EKS_CLUSTER_NAME: #[Cluster名]
+  infra:VPC_CIDR_BLOCK: #[CIDR Block]
+  infra:VPC_NAME: #[VPC名]
